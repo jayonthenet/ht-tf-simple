@@ -1,0 +1,19 @@
+apiVersion: core.api.humanitec.io/v1
+kind: Definition
+metadata:
+  id: terraforms3
+object:
+  type: s3
+  driver_type: htc-demo-22/terraform
+  driver_inputs:
+    values:
+      source: 
+        url: https://github.com/jayonthenet/ht-tf-simple.git
+        rev: refs/heads/main
+    secrets:
+      variables:
+        credentials: 
+          access_key: TODO
+          secret_key: TODO
+  criteria:
+  - env_type: development
