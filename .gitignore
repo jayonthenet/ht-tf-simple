@@ -32,3 +32,9 @@ override.tf.json
 # Ignore CLI configuration files
 .terraformrc
 terraform.rc
+
+### Manual
+# Ignore resource-definition and secret files -> We only track the template, so you need
+# not worry about changes 
+*.TODO
+resource-definition.yaml
