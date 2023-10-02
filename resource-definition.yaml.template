@@ -13,7 +13,7 @@ object:
     secrets:
       variables:
         credentials: 
-          access_key: TODO
-          secret_key: TODO
+          access_key: <<TODO>>
+          secret_key: <<TODO>>
   criteria:
   - env_type: development
