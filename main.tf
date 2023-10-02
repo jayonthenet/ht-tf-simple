@@ -10,7 +10,7 @@ terraform {
 }
 
 provider "aws" {
-  region     = "us-west-2"
+  region     = "eu-north-1"
   access_key = var.credentials.access_key
   secret_key = var.credentials.secret_key
 }
