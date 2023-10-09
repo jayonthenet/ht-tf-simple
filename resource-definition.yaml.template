@@ -4,7 +4,7 @@ metadata:
   id: terraforms3
 object:
   type: s3
-  driver_type: htc-demo-22/terraform
+  driver_type: humanitec/terraform
   driver_inputs:
     values:
       source: 
@@ -16,4 +16,4 @@ object:
           access_key: <<TODO>>
           secret_key: <<TODO>>
   criteria:
-  - env_type: development
+  - env_type: *
