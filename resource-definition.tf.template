@@ -1,9 +1,7 @@
-variable "humanitec_organization" {}
-variable "humanitec_token" {}
 variable "region" {}
 variable "access_key" {}
 variable "secret_key" {}
-variable "app_name" {}
+variable "prefix" {}
 
 terraform {
   required_providers {
@@ -14,21 +12,14 @@ terraform {
 }
 
 provider "humanitec" {
-  org_id = var.humanitec_organization
-  token  = var.humanitec_token
+  # Will read config from env-vars HUMANITEC_ORG & HUMANITEC_TOKEN
 }
 
 resource "humanitec_resource_definition" "aws_terraform_resource_s3_bucket" {
-  driver_type = "${var.humanitec_organization}/terraform"
-  id          = "${var.app_name}-aws-terrafom-s3-bucket"
-  name        = "${var.app_name}-aws-terrafom-s3-bucket"
+  driver_type = "humanitec/terraform"
+  id          = "${var.prefix}-aws-terrafom-s3-bucket"
+  name        = "${var.prefix}-aws-terrafom-s3-bucket"
   type        = "s3"
-
-  criteria = [
-    {
-      app_id = humanitec_application.app.id
-    }
-  ]
 
   driver_inputs = {
     secrets = {
@@ -47,11 +38,15 @@ resource "humanitec_resource_definition" "aws_terraform_resource_s3_bucket" {
       )
       "variables" = jsonencode(
         {
-          region          = var.region,
-          bucket          = "simple-bucket-$${context.app.id}-$${context.env.id}",
+          region = var.region,
+          bucket = "simple-bucket-$${context.app.id}-$${context.env.id}",
         }
       )
     }
   }
+}
 
+resource "humanitec_resource_definition_criteria" "aws_terraform_resource_s3_bucket" {
+  resource_definition_id = humanitec_resource_definition.aws_terraform_resource_s3_bucket.id
+  app_id                 = humanitec_application.app.id
 }

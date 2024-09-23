@@ -1,11 +1,13 @@
 apiVersion: core.api.humanitec.io/v1
 kind: Definition
 metadata:
-  id: terraforms3
-object:
+  id: ht-simp-tf-s3
+entity:
+  name: ht-simp-tf-s3
   type: s3
   driver_type: humanitec/terraform
   driver_inputs:
+    append_logs_to_error: true
     values:
       source: 
         url: https://github.com/jayonthenet/ht-tf-simple.git
